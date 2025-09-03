@@ -1,0 +1,8 @@
+stages:
+  train_model:
+    cmd: python train.py data\emails.csv model.pkl
+    deps:
+    - data\emails.csv
+    - train.py
+    outs:
+    - model.pkl

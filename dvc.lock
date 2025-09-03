@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  train_model:
+    cmd: python train.py data\emails.csv model.pkl
+    deps:
+    - path: data\emails.csv
+      hash: md5
+      md5: 4566fe81ccd7961063e393a99e8ec2f1
+      size: 480130
+    - path: train.py
+      hash: md5
+      md5: 3dbfac94841562857858ab723f7d754d
+      size: 811
+    outs:
+    - path: model.pkl
+      hash: md5
+      md5: cf98215052cf3bfd74c9cda12c6de29e
+      size: 70543
