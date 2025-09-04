@@ -1,0 +1,5 @@
+outs:
+- md5: 93ad66cc8fe5b9765e479ea856a7a21b
+  size: 10826342
+  hash: md5
+  path: completeSpamAssassin.csv

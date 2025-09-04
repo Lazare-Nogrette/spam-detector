@@ -4,6 +4,7 @@ from sklearn.linear_model import LogisticRegression
 import joblib
 from sklearn.feature_extraction.text import CountVectorizer
 import sys
+from sklearn.pipeline import Pipeline
 
 data_path = sys.argv[1]
 model_path = sys.argv[2]
@@ -15,16 +16,19 @@ def train_model(dataframe):
     # ham = 0, spam = 1
     df['Spam']=df['Category'].apply(lambda x:1 if x=='spam' else 0)
     
-    vectorizer = CountVectorizer()
-    X = vectorizer.fit_transform(df['Message'])
+    X = df['Message']
     y = df['Spam']
     
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
     
-    model = LogisticRegression()
-    model.fit(X_train, y_train)
-    return model
+    pipeline = Pipeline([
+        ('vectorizer', CountVectorizer()),
+        ('classifier', LogisticRegression())
+    ])
+
+    pipeline.fit(X_train, y_train)
+
+    return pipeline
 
 model = train_model(df)
-#joblib.dump(model, "model.pkl")
 joblib.dump(model, model_path)
